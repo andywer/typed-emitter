@@ -1,6 +1,6 @@
 # Typed-Emitter
 
-[![NPM Version](https://img.shields.io/npm/v/pg-listen.svg)](https://www.npmjs.com/package/typed-emitter)
+[![NPM Version](https://img.shields.io/npm/v/typed-emitter.svg)](https://www.npmjs.com/package/typed-emitter)
 
 Strictly typed event emitter interface for **TypeScript 3**.
 
