@@ -10,8 +10,5 @@
     "emitter",
     "typescript",
     "interface"
-  ],
-  "peerDepedencies": {
-    "typescript": ">= 3.0"
-  }
+  ]
 }
