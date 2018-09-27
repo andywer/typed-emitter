@@ -1,0 +1,17 @@
+{
+  "name": "typed-emitter",
+  "version": "0.1.0",
+  "license": "MIT",
+  "description": "Strictly typed event emitter interface for TypeScript 3.",
+  "author": "Andy Wermke (https://github.com/andywer)",
+  "repository": "github:andywer/typed-emitter",
+  "keywords": [
+    "event",
+    "emitter",
+    "typescript",
+    "interface"
+  ],
+  "peerDepedencies": {
+    "typescript": ">= 3.0"
+  }
+}
