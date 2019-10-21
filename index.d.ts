@@ -27,6 +27,7 @@ interface TypedEventEmitter<Events> {
   prependListener<E extends keyof Events> (event: E, listener: Events[E]): this
   prependOnceListener<E extends keyof Events> (event: E, listener: Events[E]): this
 
+  off<E extends keyof Events>(event: E, listener: Events[E]): this
   removeAllListeners<E extends keyof Events> (event: E): this
   removeListener<E extends keyof Events> (event: E, listener: Events[E]): this
 
