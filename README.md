@@ -47,6 +47,16 @@ messageEmitter.on("error", (error: string) => { /* ... */ })
 messageEmitter.on("failure", (error: Error) => { /* ... */ })
 ```
 
+## Extending an emitter
+
+You might find yourself in a situation where you need to extend an event emitter, but also want to strictly type its events. Here is how to.
+
+```ts
+class MyEventEmitter extends (EventEmitter as new () => TypedEmitter<MyEvents>) {
+  // ...
+}
+```
+
 ## Why another package?
 
 The interface that comes with `@types/node` is not type-safe at all. It does not even offer a way of specifying the events that the emitter will emit...
@@ -54,7 +64,6 @@ The interface that comes with `@types/node` is not type-safe at all. It does not
 The `eventemitter3` package is a popular event emitter implementation that comes with TypeScript types out of the box. Unfortunately there is no way to declare the event arguments that the listeners have to expect.
 
 There were a few other examples of type-safe event emitter interfaces out there as well. They were either not published to npm, had an inconsistent interface or other limitations.
-
 
 ## License
 
