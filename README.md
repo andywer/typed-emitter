@@ -57,6 +57,12 @@ class MyEventEmitter extends (EventEmitter as new () => TypedEmitter<MyEvents>) 
 }
 ```
 
+As a generic class:
+
+```ts
+class MyEventEmitter<T> extends (EventEmitter as { new<T>(): TypedEmitter<T> })<T>
+```
+
 ## Why another package?
 
 The interface that comes with `@types/node` is not type-safe at all. It does not even offer a way of specifying the events that the emitter will emit...
