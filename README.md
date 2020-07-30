@@ -60,7 +60,9 @@ class MyEventEmitter extends (EventEmitter as new () => TypedEmitter<MyEvents>) 
 As a generic class:
 
 ```ts
-class MyEventEmitter<T> extends (EventEmitter as { new<T>(): TypedEmitter<T> })<T>
+class MyEventEmitter<T> extends (EventEmitter as { new<T>(): TypedEmitter<T> })<T> {
+  // ...
+}
 ```
 
 ## Why another package?
