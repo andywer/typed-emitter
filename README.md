@@ -10,10 +10,10 @@ Code size: Zero bytes - Just the typings, no implementation. Use the default eve
 ## Installation
 
 ```sh
-$ npm install typed-emitter
+$ npm install --save-dev typed-emitter
 
 # Using yarn:
-$ yarn add typed-emitter
+$ yarn add --dev typed-emitter
 ```
 
 
