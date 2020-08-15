@@ -1,4 +1,4 @@
-type Arguments<T> = [T] extends [(...args: infer U) => any]
+export type Arguments<T> = [T] extends [(...args: infer U) => any]
   ? U
   : [T] extends [void] ? [] : [T]
 
