@@ -10,5 +10,6 @@
     "emitter",
     "typescript",
     "interface"
-  ]
+  ],
+  "main": "./index.d.ts"
 }
