@@ -2,7 +2,7 @@
 
 [![NPM Version](https://img.shields.io/npm/v/typed-emitter.svg)](https://www.npmjs.com/package/typed-emitter)
 
-Strictly typed event emitter interface for **TypeScript 3**.
+Strictly typed event emitter interface for TypeScript.
 
 Code size: Zero bytes - Just the typings, no implementation. Use the default event emitter of the `events` module in node.js or bring your favorite implementation when writing code for the browser.
 
