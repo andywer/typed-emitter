@@ -11,5 +11,6 @@
     "typescript",
     "interface"
   ],
-  "main": "./index.d.ts"
+  "main": "./index.js",
+  "types": "./index.d.ts"
 }
