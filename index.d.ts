@@ -1,13 +1,9 @@
-// export type Arguments<T> = [T] extends [(...args: infer U) => any]
-//   ? U
-//   : [T] extends [void] ? [] : [T]
-
-// variable name support
 export type Arguments<T> = [T] extends [(...args: infer U) => any]
 	? U
 	: [T] extends [void]
 	? []
 	: [T];
+
 export type EventFunction = (...args: any[]) => void;
 export type EmitterEvents = EmitterEvent<string, EventFunction>;
 export type EmitterEvent<Name extends string, Func extends EventFunction> = {
@@ -20,20 +16,26 @@ export type EmitterEvent<Name extends string, Func extends EventFunction> = {
  *
  * Use it like this:
  *
- * interface MyEvents {
- *   error: (error: Error) => void
- *   message: (from: string, content: string) => void
- * }
+ * type DynamicEvents =
+ * | EmitterEvent<'ping', () => void>
+ * | EmitterEvent<'message', (from: string, content: string) => void>
+ * | EmmiterEvents<'error': (error: Error) => void>
+ * | EmitterEvent<`foo:${string}`, (size: number, strict: boolean) => void>
+ * | EmitterEvent<`bar:${string}`, (force: boolean) => void>;
  *
- * const myEmitter = new EventEmitter() as TypedEmitter<MyEvents>
+ * const myEmitter = new EventEmitter() as TypedEmitter<DynamicEvents>
  *
  * myEmitter.on("message", (from, content) => {
  *   // ...
  * })
  *
  * myEmitter.emit("error", "x")  // <- Will catch this type error
+ *
+ * myEmitter.emit("foo:1", 2, false) // dynamic/variable event names work
+ * myEmitter.emit(`foo:${'456'}`, 2, false)
+ *
  */
-interface TypedEventEmitter<Events extends EmitterEvents> {
+export interface TypedEventEmitter<Events extends EmitterEvents> {
 	addListener<E extends keyof Events>(event: E, listener: Events[E]): this;
 	on<E extends keyof Events>(event: E, listener: Events[E]): this;
 	once<E extends keyof Events>(event: E, listener: Events[E]): this;
@@ -44,8 +46,7 @@ interface TypedEventEmitter<Events extends EmitterEvents> {
 	removeAllListeners<E extends keyof Events>(event?: E): this;
 	removeListener<E extends keyof Events>(event: E, listener: Events[E]): this;
 
-	// emit<E extends keyof Events> (event: E, ...args: Arguments<Events[E]>): boolean
-	emit<E extends Events>(name: E['name'], ...args: E['args']): this;
+	emit<E extends Events>(name: E['name'], ...args: E['args']): boolean;
 	eventNames(): (keyof Events | string | symbol)[];
 	rawListeners<E extends keyof Events>(event: E): Function[];
 	listeners<E extends keyof Events>(event: E): Function[];
