@@ -1,6 +1,19 @@
+// export type Arguments<T> = [T] extends [(...args: infer U) => any]
+//   ? U
+//   : [T] extends [void] ? [] : [T]
+
+// variable name support
 export type Arguments<T> = [T] extends [(...args: infer U) => any]
-  ? U
-  : [T] extends [void] ? [] : [T]
+	? U
+	: [T] extends [void]
+	? []
+	: [T];
+type EventFunction = (...args: any[]) => void;
+type EmitterEvents = EmitterEvent<string, EventFunction>;
+type EmitterEvent<Name extends string, Func extends EventFunction> = {
+	name: Name;
+	args: Arguments<Func>;
+};
 
 /**
  * Type-safe event emitter.
@@ -20,25 +33,26 @@ export type Arguments<T> = [T] extends [(...args: infer U) => any]
  *
  * myEmitter.emit("error", "x")  // <- Will catch this type error
  */
-interface TypedEventEmitter<Events> {
-  addListener<E extends keyof Events> (event: E, listener: Events[E]): this
-  on<E extends keyof Events> (event: E, listener: Events[E]): this
-  once<E extends keyof Events> (event: E, listener: Events[E]): this
-  prependListener<E extends keyof Events> (event: E, listener: Events[E]): this
-  prependOnceListener<E extends keyof Events> (event: E, listener: Events[E]): this
+interface TypedEventEmitter<Events extends EmitterEvents> {
+	addListener<E extends keyof Events>(event: E, listener: Events[E]): this;
+	on<E extends keyof Events>(event: E, listener: Events[E]): this;
+	once<E extends keyof Events>(event: E, listener: Events[E]): this;
+	prependListener<E extends keyof Events>(event: E, listener: Events[E]): this;
+	prependOnceListener<E extends keyof Events>(event: E, listener: Events[E]): this;
 
-  off<E extends keyof Events>(event: E, listener: Events[E]): this
-  removeAllListeners<E extends keyof Events> (event?: E): this
-  removeListener<E extends keyof Events> (event: E, listener: Events[E]): this
+	off<E extends keyof Events>(event: E, listener: Events[E]): this;
+	removeAllListeners<E extends keyof Events>(event?: E): this;
+	removeListener<E extends keyof Events>(event: E, listener: Events[E]): this;
 
-  emit<E extends keyof Events> (event: E, ...args: Arguments<Events[E]>): boolean
-  eventNames (): (keyof Events | string | symbol)[]
-  rawListeners<E extends keyof Events> (event: E): Function[]
-  listeners<E extends keyof Events> (event: E): Function[]
-  listenerCount<E extends keyof Events> (event: E): number
+	// emit<E extends keyof Events> (event: E, ...args: Arguments<Events[E]>): boolean
+	emit<E extends Events>(name: E['name'], ...args: E['args']): this;
+	eventNames(): (keyof Events | string | symbol)[];
+	rawListeners<E extends keyof Events>(event: E): Function[];
+	listeners<E extends keyof Events>(event: E): Function[];
+	listenerCount<E extends keyof Events>(event: E): number;
 
-  getMaxListeners (): number
-  setMaxListeners (maxListeners: number): this
+	getMaxListeners(): number;
+	setMaxListeners(maxListeners: number): this;
 }
 
-export default TypedEventEmitter
+export default TypedEventEmitter;
