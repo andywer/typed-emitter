@@ -8,9 +8,9 @@ export type Arguments<T> = [T] extends [(...args: infer U) => any]
 	: [T] extends [void]
 	? []
 	: [T];
-type EventFunction = (...args: any[]) => void;
-type EmitterEvents = EmitterEvent<string, EventFunction>;
-type EmitterEvent<Name extends string, Func extends EventFunction> = {
+export type EventFunction = (...args: any[]) => void;
+export type EmitterEvents = EmitterEvent<string, EventFunction>;
+export type EmitterEvent<Name extends string, Func extends EventFunction> = {
 	name: Name;
 	args: Arguments<Func>;
 };
