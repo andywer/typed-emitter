@@ -5,10 +5,10 @@
  */
 /* eslint-disable no-use-before-define */
 import { 
-  fromEvent as rxjsFromEvent, 
+  fromEvent as rxFromEvent, 
   Observable,
 } from 'rxjs'
-import type TypedEventEmitter from 'typed-emitter'
+import type TypedEventEmitter from '../index'
 
 type ObservedValue<A extends unknown[]> =
   A['length'] extends 0 ? void :
@@ -22,4 +22,4 @@ interface FromTypedEvent {
   >(emitter: Emitter, event: EventName): Observable<ObservedValue<Events[EventName] extends (...args: infer A) => any ? A : never>>   
 }
 
-export type FromEvent = FromTypedEvent & typeof rxjsFromEvent
+export type FromEvent = FromTypedEvent & typeof rxFromEvent

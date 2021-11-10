@@ -72,11 +72,11 @@ The default `fromEvent` from RxJS will return an `Observable<unknown>` for our t
 This can be fixed by the following code, by replacing the `fromEvent` type with our enhanced one: `FromEvent`:
 
 ```ts
-import { fromEvent as rxjsFromEvent } from "rxjs"
+import { fromEvent as rxFromEvent } from "rxjs"
 import { FromEvent } from "typed-emitter/rxjs"
 
 // The `Observable` typing can be correctly inferenced
-const fromEvent = rxjsFromEvent as FromEvent
+const fromEvent = rxFromEvent as FromEvent
 ```
 
 Learn more from [rxjs fromEvent compatibility #9](https://github.com/andywer/typed-emitter/issues/9)
