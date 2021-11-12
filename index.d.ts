@@ -32,7 +32,7 @@ interface TypedEventEmitter<Events> {
   removeListener<E extends keyof Events> (event: E, listener: Events[E]): this
 
   emit<E extends keyof Events> (event: E, ...args: Arguments<Events[E]>): boolean
-  eventNames (): (keyof Events | string | symbol)[]
+  eventNames (): (keyof Events)[]
   rawListeners<E extends keyof Events> (event: E): Function[]
   listeners<E extends keyof Events> (event: E): Function[]
   listenerCount<E extends keyof Events> (event: E): number
