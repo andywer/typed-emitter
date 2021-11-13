@@ -32,6 +32,7 @@ interface TypedEventEmitter<Events> {
   removeListener<E extends keyof Events> (event: E, listener: Events[E]): this
 
   emit<E extends keyof Events> (event: E, ...args: Arguments<Events[E]>): boolean
+  // The sloppy `eventNames()` return type is to mitigate type incompatibilities - see #5
   eventNames (): (keyof Events | string | symbol)[]
   rawListeners<E extends keyof Events> (event: E): Function[]
   listeners<E extends keyof Events> (event: E): Function[]
