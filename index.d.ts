@@ -7,18 +7,16 @@ export type Arguments<T> = [T] extends [(...args: infer U) => any]
  *
  * Use it like this:
  *
+ * ```typescript
  * interface MyEvents {
- *   error: (error: Error) => void
- *   message: (from: string, content: string) => void
+ *   error: (error: Error) => void;
+ *   message: (from: string, content: string) => void;
  * }
  *
- * const myEmitter = new EventEmitter() as TypedEmitter<MyEvents>
+ * const myEmitter = new EventEmitter() as TypedEmitter<MyEvents>;
  *
- * myEmitter.on("message", (from, content) => {
- *   // ...
- * })
- *
- * myEmitter.emit("error", "x")  // <- Will catch this type error
+ * myEmitter.emit("error", "x")  // <- Will catch this type error;
+ * ```
  */
 interface TypedEventEmitter<Events> {
   addListener<E extends keyof Events> (event: E, listener: Events[E]): this
