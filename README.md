@@ -25,7 +25,7 @@ import TypedEmitter from "typed-emitter"
 
 // Define your emitter's types like that:
 // Key: Event name; Value: Listener function signature
-interface MessageEvents {
+type MessageEvents = {
   error: (error: Error) => void,
   message: (body: string, from: string) => void
 }
