@@ -65,6 +65,23 @@ class MyEventEmitter<T> extends (EventEmitter as { new<T>(): TypedEmitter<T> })<
 }
 ```
 
+## RxJS `fromEvent` types inference
+
+The default `fromEvent` from RxJS will return an `Observable<unknown>` for our typed emitter.
+
+This can be fixed by the following code, by replacing the `fromEvent` type with our enhanced one: `FromEvent`:
+
+```ts
+import { fromEvent as rxFromEvent } from "rxjs"
+import { FromEvent } from "typed-emitter/rxjs"
+
+// The `Observable` typing can be correctly inferenced
+const fromEvent = rxFromEvent as FromEvent
+```
+
+Learn more from [rxjs fromEvent compatibility #9](https://github.com/andywer/typed-emitter/issues/9)
+for the `fromEvent` compatibility discussions.
+
 ## Why another package?
 
 The interface that comes with `@types/node` is not type-safe at all. It does not even offer a way of specifying the events that the emitter will emit...

@@ -12,5 +12,8 @@
     "interface"
   ],
   "main": "./types.js",
-  "types": "./index.d.ts"
+  "types": "./index.d.ts",
+  "optionalDependencies": {
+    "rxjs": "*"
+  }
 }
