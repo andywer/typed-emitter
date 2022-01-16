@@ -8,7 +8,7 @@ type EventMap = {
  * Use it like this:
  *
  * ```typescript
- * interface MyEvents {
+ * type MyEvents = {
  *   error: (error: Error) => void;
  *   message: (from: string, content: string) => void;
  * }
