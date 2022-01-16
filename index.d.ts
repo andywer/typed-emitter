@@ -1,6 +1,6 @@
-export type Arguments<T> = [T] extends [(...args: infer U) => any]
-  ? U
-  : [T] extends [void] ? [] : [T]
+type EventMap = {
+  [key: string]: (...args: any[]) => void
+}
 
 /**
  * Type-safe event emitter.
@@ -18,7 +18,7 @@ export type Arguments<T> = [T] extends [(...args: infer U) => any]
  * myEmitter.emit("error", "x")  // <- Will catch this type error;
  * ```
  */
-interface TypedEventEmitter<Events> {
+interface TypedEventEmitter<Events extends EventMap> {
   addListener<E extends keyof Events> (event: E, listener: Events[E]): this
   on<E extends keyof Events> (event: E, listener: Events[E]): this
   once<E extends keyof Events> (event: E, listener: Events[E]): this
@@ -29,11 +29,11 @@ interface TypedEventEmitter<Events> {
   removeAllListeners<E extends keyof Events> (event?: E): this
   removeListener<E extends keyof Events> (event: E, listener: Events[E]): this
 
-  emit<E extends keyof Events> (event: E, ...args: Arguments<Events[E]>): boolean
+  emit<E extends keyof Events> (event: E, ...args: Parameters<Events[E]>): boolean
   // The sloppy `eventNames()` return type is to mitigate type incompatibilities - see #5
   eventNames (): (keyof Events | string | symbol)[]
-  rawListeners<E extends keyof Events> (event: E): Function[]
-  listeners<E extends keyof Events> (event: E): Function[]
+  rawListeners<E extends keyof Events> (event: E): Events[E][]
+  listeners<E extends keyof Events> (event: E): Events[E][]
   listenerCount<E extends keyof Events> (event: E): number
 
   getMaxListeners (): number
