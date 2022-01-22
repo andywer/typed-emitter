@@ -73,7 +73,7 @@ This can be fixed by the following code, by replacing the `fromEvent` type with 
 
 ```ts
 import { fromEvent as rxFromEvent } from "rxjs"
-import { FromEvent } from "typed-emitter/rxjs"
+import { default as TypedEmitter, FromEvent } from "typed-emitter/rxjs"
 
 // The `Observable` typing can be correctly inferenced
 const fromEvent = rxFromEvent as FromEvent
