@@ -1,4 +1,4 @@
-type EventMap = {
+export type EventMap = {
   [key: string]: (...args: any[]) => void
 }
 
@@ -38,12 +38,6 @@ interface TypedEventEmitter<Events extends EventMap> {
 
   getMaxListeners (): number
   setMaxListeners (maxListeners: number): this
-
-  /**
-   * required by `FromEvent`
-   * @see https://github.com/devanshj/rxjs-from-emitter/issues/4#issuecomment-665104646
-   */
-  __events: Events
 }
 
 export default TypedEventEmitter
