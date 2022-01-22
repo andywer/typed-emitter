@@ -15,5 +15,8 @@
   "types": "./index.d.ts",
   "optionalDependencies": {
     "rxjs": "*"
+  },
+  "devDependencies": {
+    "rxjs": "^7.5.2"
   }
 }
