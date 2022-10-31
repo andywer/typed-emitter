@@ -24,7 +24,7 @@ interface FromTypedEvent {
 
 export type FromEvent = FromTypedEvent & typeof rxFromEvent
 
-interface TypedEmitter<Events extends EventMap> extends BaseTypedEmitter<Events> {
+declare class TypedEmitter<Events extends EventMap> extends BaseTypedEmitter<Events> {
   /**
    * required by `FromEvent`
    * @see https://github.com/devanshj/rxjs-from-emitter/issues/4#issuecomment-665104646

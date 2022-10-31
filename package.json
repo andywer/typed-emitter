@@ -1,6 +1,6 @@
 {
   "name": "typed-emitter",
-  "version": "2.1.0",
+  "version": "3.0.0",
   "license": "MIT",
   "description": "Strictly typed event emitter interface for TypeScript 3.",
   "author": "Andy Wermke (https://github.com/andywer)",
@@ -11,8 +11,18 @@
     "typescript",
     "interface"
   ],
-  "main": "./types.js",
-  "types": "./index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./index.cjs",
+      "import": "./index.mjs",
+      "types": "./index.d.ts"
+    },
+    "./rxjs": {
+      "require": "./rxjs/index.cjs",
+      "import": "./rxjs/index.mjs",
+      "types": "./rxjs/index.d.ts"
+    }
+  },
   "optionalDependencies": {
     "rxjs": "*"
   },
